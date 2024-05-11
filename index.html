@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="src/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini RPG</title>
+</head>
+<body>
+    <main>
+        <div id="robot">
+            <div id="chatbox">
+                <input type="text" placeholder="Fale aqui" value="Levanto da cama">
+                <button id="sendbutton">
+                    Enviar
+                </button>
+            </div>
+            <button id="showhistory">
+                Mostrar histórico
+            </button>
+        </div>
+    </main>
+    
+    <!--Colocando o @google/generative-ai como uma das depedências do projeto-->
+    <script type="importmap">
+        {
+            "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+
+    <!--Usando a API-->
+    <script type="module" src="src/javascript/script.js"></script>
+</body>
+</html>
