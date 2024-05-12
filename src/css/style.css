@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    color: white;
 }
 main{
     width: 100%;
@@ -8,27 +9,190 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-#robot{
-    background-color: red;
-    width: 80px;
-    height: 120px;
+    background-image: url(../images/pixel-art-background.png);
 
-    #chatbox{
-        background-color: yellow;
-        width: 150px;
-        height: 50px;
-        position: relative;
-        left: -135px;
-        top: -20px;
+    & #main-content{
+        width: 90%;
+        height: 90%;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        justify-content: space-between;
 
-        input{
-            padding: 5px 10px;
-            width: 80%;
-            height: auto;
+        & #left-column{
+            width: 50%;
+            height: 100%;
+
+            & p{
+                font-size: 17px;
+            }
+            & #start-button{
+                margin: 20px 0px;
+                padding: 10px;
+                background-color: var(--primary-color);
+                font-weight: bolder;
+                border: 2px solid var(--secondary-color);
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                width: 150px;
+
+                &:before{
+                    transition: all .2s;
+                    width: 100%;
+                    height: 100%;
+                    background-color: var(--secondary-color);
+                    position: absolute;
+                    content: 'Começar a Aventura';
+                    top: -100px;
+                    left: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                &:hover:before{
+                    top: 0;
+                }
+            }
+            & #chatbox{
+                width: 90%;
+                height: 74%;
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar{
+                    background-color: transparent;
+                }
+                & .message{
+                    background-color: white;
+                    width: 60%;
+                    height: auto;
+                    position: relative;
+                    margin-left: 20px;
+                    border-radius: 6px;
+                    margin-bottom: 20px;
+
+                    /*&:after{
+                        background-color: white;
+                        position: absolute;
+                        width: 40px;
+                        height: 40px;
+                        content: '';
+                        transform: rotate(135deg);
+                        left: -11px;
+                    }*/
+                    & .user-message-content{
+                        width: 100%;
+                        height: auto;
+                        background-color: inherit;
+                        z-index: 1;
+                        border-radius: inherit;
+                        padding: 10px;
+                        min-height: 40px;
+                        
+                        & h5{
+                            color: black;
+                            font-size: 16px;
+                            overflow-wrap: break-word;
+                            background-color: inherit;
+
+                            &:focus{
+                                outline: none;
+                            }
+                        }
+                    }
+                    &.model{
+                        background-color: var(--secondary-color);
+                        position: relative;
+                        left: 150px;
+                        
+                        & h5{
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+        & #right-column{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            & h2{
+                width: 100%;
+            }
+            & .character-box{
+                background-color: rgba(165, 42, 42, 0.39);
+                width: 90%;
+                height: 35%;
+                padding: 10px;
+                margin: 20px 0px;
+                border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                & textarea{
+                    background-color: var(--primary-color);
+                    padding: 5px;
+                    overflow-y: scroll;
+                    border: 2px solid var(--primary-color);
+                    font-size: 16px;
+                    height: 300px;
+                    resize: none;
+
+                    &::-webkit-scrollbar{
+                        background-color: transparent;
+                    }
+                    &:focus{
+                        outline: none;
+                        border: 2px solid var(--secondary-color);
+                    }
+                }
+                & #character-status{
+                    height: 100px;
+                    margin-top: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    & #status{
+                        width: 50%;
+                        height: 90%;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 5px;
+
+                        & h3{
+                            padding: 5px;
+                            background-color: var(--primary-color);
+                            font-size: 15px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            cursor: pointer;
+                            
+                            & input{
+                                width: 25px;
+                                text-align: end;
+                                background-color: transparent;
+                                border: none;
+
+                                &:focus{
+                                    outline: none;
+                                }
+                            }
+                            &:hover{
+                                background-color: green;
+                            }
+                        }
+                    }
+                }
+                & #world{
+                    height: 100%;
+                }
+            }
         }
     }
 }

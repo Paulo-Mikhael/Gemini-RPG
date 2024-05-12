@@ -2,22 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="src/css/vars.css">
     <link rel="stylesheet" href="src/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gemini RPG</title>
 </head>
-<body>
+<body id="gemini-rpg">
     <main>
-        <div id="robot">
-            <div id="chatbox">
-                <input type="text" placeholder="Fale aqui" value="Levanto da cama">
-                <button id="sendbutton">
-                    Enviar
+        <div id="main-content">
+            <div id="left-column">
+                <h1>
+                    Bem vindo
+                </h1>
+                <p>
+                    Construa seu personagem e comece sua aventura
+                </p>
+                <button id="start-button">
+                    <h4>
+                        Estou Pronto!
+                    </h4>
                 </button>
+                <div id="chatbox">
+                    <div class="message user">
+                        <div class="user-message-content">
+                            <h5 contenteditable="true">
+                                Fale algo!
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="message model">
+                        <div class="user-message-content">
+                            <h5>
+                                afsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasdafsdafasd
+                            </h5>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button id="showhistory">
-                Mostrar histórico
-            </button>
+            <div id="right-column">
+                <h2>
+                    Você é:
+                </h2>
+                <div class="character-box">
+                    <textarea name="" id="character" placeholder="Escreva em um máximo de 300 caracteres" maxlength="300">Um guerreiro Viking que acabou de acordar</textarea>
+                    <div id="character-status">
+                        <div id="status">
+                            <h3>
+                                Força:
+                                <input type="text" value="40" maxlength="3" id="strenght">
+                            </h3>
+                            <h3>
+                                Vitalidade:
+                                <input type="text" value="50" maxlength="3" id="vitality">
+                            </h3>
+                            <h3>
+                                Destreza:
+                                <input type="text" value="20" maxlength="3" id="dexterity">
+                            </h3>
+                            <h3>
+                                Inteligência:
+                                <input type="text" value="80" maxlength="3" id="intelligence">
+                            </h3>
+                            <h3>
+                                Carisma:
+                                <input type="text" value="10" maxlength="3" id="charisma">
+                            </h3>
+                            <h3>
+                                Sabedoria:
+                                <input type="text" value="90" maxlength="3" id="wisdom">
+                            </h3>
+                        </div>
+                        aaa
+                    </div>
+                </div>
+                <h2>
+                    Em um:
+                </h2>
+                <div class="character-box">
+                    <textarea name="" id="world" placeholder="Escreva em no máximo 500 caracteres" maxlength="500">Mundo com magia</textarea>
+                </div>
+            </div>
         </div>
     </main>
     
@@ -29,6 +93,8 @@
             }
         }
     </script>
+
+    <script src="src/javascript/apikey.js"></script>
 
     <!--Usando a API-->
     <script type="module" src="src/javascript/script.js"></script>

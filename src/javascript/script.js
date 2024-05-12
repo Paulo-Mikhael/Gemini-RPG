@@ -1,18 +1,45 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 
-const input = document.querySelector('input');
-const sendButton = document.querySelector('#sendbutton');
-const showHistory = document.querySelector('#showhistory');
+const character = document.querySelector('#character').textContent;
 
-const API_KEY = "AIzaSyDLXP8C9TZAoFeopF4-WdqcBCpVpWG9PZA";
+const strenght = document.querySelector('#strenght').textContent;
+const vitality = document.querySelector('#vitality').textContent;
+const intelligence = document.querySelector('#intelligence').textContent;
+const dexterity = document.querySelector('#dexterity').textContent;
+const wisdom = document.querySelector('#wisdom').textContent;
+const charisma = document.querySelector('#charisma').textContent;
+
+const world = document.querySelector('#world').textContent;
+
+const startButton = document.querySelector('#start-button');
+const messages = document.querySelectorAll('h5');
+
+messages.forEach(element => {
+    let value;
+
+    element.addEventListener('focus', () => {
+        element.textContent = "";
+    });
+    element.addEventListener('blur', () => {
+        if (element.textContent == ""){
+            element.contentEditable = "true";
+            element.textContent = 'Fale algo!';
+        }
+        else{
+            element.contentEditable = "false";
+        }
+    });
+});
+
+const API_KEY = KEY;
 
 // Gemini
 const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Configurações de geração
 const generationConfig = {
-    temperature: 1,
+    temperature: 1, 
     topP: 1,
     topK: 100,
 };
@@ -40,42 +67,22 @@ const safetySettings = [
 const historico = [
     {
         role: "user",
-        parts: [{ text: "Você é um narrador de uma história rpg, e cada vez que você narra a mensagem não pode ultrapassar 300 caracteres " + 
-        "e no final você dá uma abertura para o jogador continuar a falar, tipo 'o que fará agora?', 'como partirá daqui pra frente?', e etc." +
-        " Além disso você não irá deixar o jogador fazer coisas humanamente impossíveis" }],
+        parts: [{ text: "Você é um narrador de uma história rpg, e deve seguir estas regras: cada vez que você narra a mensagem não pode " +
+        "Você não irá deixar o jogador fazer coisas impossíveis, para definir o que é possível ou não o jogador fazer, " +
+        "você deve seguir os status do jogador: Força - " + strenght + ", Vitalidade: " + vitality + ", Destreza: " + dexterity + ", Carisma: " +
+        charisma + ", Inteligência: " + intelligence + ", Sabedoria: " + wisdom + ". Sendo que," + 
+        "A Força representa a capacidade física bruta do personagem, influenciando sua habilidade em causar dano corpo a corpo, carregar itens pesados e executar tarefas que exigem força física," +    
+        "A Destreza refere-se à agilidade, reflexos e coordenação motora fina do personagem. Afeta sua precisão em ataques à distância, esquiva de ataques inimigos e habilidades que exigem movimentos rápidos e precisos," +
+        "A Vitalidade indica a resistência física e saúde do personagem. Influencia sua capacidade de resistir a danos, doenças e condições adversas, bem como sua resistência a efeitos negativos," +
+        "A Inteligência representa a capacidade mental, conhecimento e habilidade de resolver problemas. Afeta habilidades mágicas, capacidade de aprendizado, e resolver enigmas ou desafios intelectuais," +
+        "A Sabedoria refere-se ao discernimento, intuição e percepção do personagem. Influencia a capacidade de perceber sutilezas, resistir a influências mágicas ou mentais, e tomar decisões sábias e prudentes e " +
+        "O Carisma indica o carisma, presença e persuasão do personagem. Afeta sua habilidade de interagir com NPCs e outros personagens, persuadir ou intimidar, bem como sua capacidade de liderança e influência sobre os outros personagens."
+    }],
     },
     {
         role: "model",
-        parts: [{ text: "Certo, Irei contar uma história sobre um aldeão que sonhava em se tornar rei, este é você. Deitado na cama, perdido " +
-        "nos pensamentos, você volta pra realidade por um momento, o que você fará agora?" }],
-    },
-    {
-        role: "user",
-        parts: [{ text: "Vou até o castelo e falo com rei" }]
-    },
-    {
-        role: "model",
-        parts: [{ text: "Depois de dias em sua jornada ao castelo, lá está você, em frente ao rei, ele olha para você com um olhar furioso. " +
-        "O que será que pode acontecer se falar com ele?" }],
-    },
-    {
-        role: "user",
-        parts: [{ text: "Eu queria que a história me levasse direto da cama para o castelo sem durar vários dias" }]
-    },
-    {
-        role: "model",
-        parts: [{ text: "*Você estava na cama, e a viajem até o castelo dura muito tempo, não tem como você realizar essa viajem em um dia, " +
-        "deseja voltar para antes dessa ação?*" }]
-    },
-    {
-        role: "user",
-        parts: [{ text: "Sim" }]
-    },
-    {
-        role: "model",
-        parts: [{ text: "Certo, Irei contar uma história sobre um aldeão que sonhava em se tornar rei, este é você. Deitado na cama, perdido " + 
-        "nos pensamentos, você volta pra realidade por um momento, o que você fará agora?" }],
-    },
+        parts: [{ text: "Irei contar uma história sobre " + character + ", este é você. Em um " + world + " você desperta." }],
+    }
 ]
 
 const model = genAI.getGenerativeModel({ model: "gemini-pro"});
@@ -109,13 +116,6 @@ async function run(prompt) {
     document.body.style.backgroundColor = 'white';
 }
 
-sendButton.addEventListener('click', () => {
-    run(input.value);
-});
-
-showHistory.addEventListener('click', () => {
-    historico.forEach(el => {
-        console.log(el.role + "\r\n");
-        console.log(el.parts[0].text + "\r\n");
-    });
+startButton.addEventListener('click', () => {
+    run('Olho em volta');
 });
